@@ -60,5 +60,6 @@ foreach ($data as $row) {
 // Saving file
 Writer::writeToFile($writer, 'example.xlsx');
 ```
-
+ 
+ 
 [Example .xlsx File](https://github.com/oskargunther/excel-writer/raw/master/examples/example.xlsx)
