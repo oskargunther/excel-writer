@@ -78,9 +78,13 @@ class Writer
             return $cell->getStylesArray();
         }, $header->getCells());
 
-        $styles['widths'] = array_map(function(HeaderCell $cell) {
-            return $cell->getColumnWidth();
-        }, $header->getCells());
+        if(!empty($header->getWidths())) {
+            $styles['widths'] = $header->getWidths();
+        } else {
+            $styles['widths'] = array_map(function(HeaderCell $cell) {
+                return $cell->getColumnWidth();
+            }, $header->getCells());
+        }
 
         if($header->getFreezeRows() !== null) {
             $styles['freeze_rows'] = $header->getFreezeRows();

@@ -32,6 +32,11 @@ class Header
     private $style;
 
     /**
+     * @var int[]
+     */
+    private $widths;
+
+    /**
      * @return HeaderCell[]|null
      */
     public function getCells(): ?array
@@ -120,6 +125,24 @@ class Header
     public function setStyle(CellStyle $style): self
     {
         $this->style = $style;
+        return $this;
+    }
+
+    /**
+     * @return int[]|null
+     */
+    public function getWidths(): ?array
+    {
+        return $this->widths;
+    }
+
+    /**
+     * @param int[] $widths
+     * @return self
+     */
+    public function setWidths(array $widths): self
+    {
+        $this->widths = $widths;
         return $this;
     }
 
