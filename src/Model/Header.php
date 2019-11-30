@@ -27,6 +27,11 @@ class Header
     private $freezeColumns;
 
     /**
+     * @var CellStyle
+     */
+    private $style;
+
+    /**
      * @return HeaderCell[]|null
      */
     public function getCells(): ?array
@@ -97,6 +102,24 @@ class Header
     public function setFreezeColumns(int $freezeColumns): self
     {
         $this->freezeColumns = $freezeColumns;
+        return $this;
+    }
+
+    /**
+     * @return CellStyle|null
+     */
+    public function getStyle(): ?CellStyle
+    {
+        return $this->style;
+    }
+
+    /**
+     * @param CellStyle $style
+     * @return self
+     */
+    public function setStyle(CellStyle $style): self
+    {
+        $this->style = $style;
         return $this;
     }
 

@@ -70,7 +70,11 @@ class Writer
             $row[$cell->getValue()] = $cell->getDataType();
         }
 
-        $styles = array_map(function(HeaderCell $cell) {
+        $styles = array_map(function(HeaderCell $cell) use ($header) {
+            if($header->getStyle()) {
+                return $header->getStyle()->toArray();
+            }
+
             return $cell->getStylesArray();
         }, $header->getCells());
 
