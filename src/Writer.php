@@ -5,7 +5,9 @@ namespace ExcelWriter;
 
 use ExcelWriter\Exception\InvalidParameterClassException;
 use ExcelWriter\Model\Cell;
+use ExcelWriter\Model\Header;
 use ExcelWriter\Model\HeaderCell;
+use ExcelWriter\Model\Row;
 use XLSXWriter;
 
 class Writer
@@ -40,13 +42,13 @@ class Writer
     /**
      * @param XLSXWriter $writer
      * @param string $sheet
-     * @param Cell[] $cells
+     * @param Row $xlsxRow
      * @throws
      */
-    public static function writeRow(XLSXWriter $writer, string $sheet, array $cells): void
+    public static function writeRow(XLSXWriter $writer, string $sheet, Row $xlsxRow): void
     {
         $row = [];
-        foreach ($cells as $cell) {
+        foreach ($xlsxRow->getCells() as $cell) {
             if(!$cell instanceof Cell) {
                 throw new InvalidParameterClassException();
             }
@@ -56,7 +58,15 @@ class Writer
 
         $styles = array_map(function(Cell $cell) {
             return $cell->getStylesArray();
-        }, $cells);
+        }, $xlsxRow->getCells());
+
+        if($xlsxRow->getHeight() !== null) {
+            $styles['height'] = $xlsxRow->getHeight();
+        }
+
+        $styles['wrap_text'] = $xlsxRow->isWrapText();
+        $styles['hidden'] = $xlsxRow->isHidden();
+        $styles['collapsed'] = $xlsxRow->isCollapsed();
 
         $writer->writeSheetRow($sheet, $row, $styles);
     }
@@ -64,23 +74,17 @@ class Writer
     /**
      * @param XLSXWriter $writer
      * @param string $sheet
-     * @param HeaderCell[] $cells
-     * @param int $freezeRows
-     * @param int $freezeColumns
-     * @param bool $autoFilter
+     * @param Header $header
      * @throws
      */
     public static function writeHeaderRow(
         XLSXWriter $writer,
         string $sheet,
-        array $cells,
-        int $freezeRows = null,
-        int $freezeColumns = null,
-        bool $autoFilter = false
+        Header $header
     ): void
     {
         $row = [];
-        foreach ($cells as $cell) {
+        foreach ($header->getCells() as $cell) {
             if(!$cell instanceof HeaderCell) {
                 throw new InvalidParameterClassException();
             }
@@ -90,21 +94,21 @@ class Writer
 
         $styles = array_map(function(HeaderCell $cell) {
             return $cell->getStylesArray();
-        }, $cells);
+        }, $header->getCells());
 
         $styles['widths'] = array_map(function(HeaderCell $cell) {
             return $cell->getColumnWidth();
-        }, $cells);
+        }, $header->getCells());
 
-        if($freezeRows !== null) {
-            $styles['freeze_rows'] = $freezeRows;
+        if($header->getFreezeRows() !== null) {
+            $styles['freeze_rows'] = $header->getFreezeRows();
         }
 
-        if($freezeColumns !== null) {
-            $styles['freeze_columns'] = $freezeColumns;
+        if($header->getFreezeColumns() !== null) {
+            $styles['freeze_columns'] = $header->getFreezeColumns();
         }
 
-        if($autoFilter) {
+        if($header->isAutoFilter()) {
             $styles['auto_filter'] = true;
         }
 

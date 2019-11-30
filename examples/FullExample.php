@@ -6,6 +6,8 @@ use ExcelWriter\Writer;
 use ExcelWriter\Model\HeaderCell;
 use ExcelWriter\Model\CellStyle;
 use ExcelWriter\Model\Cell;
+use ExcelWriter\Model\Header;
+use ExcelWriter\Model\Row;
 
 $writer = Writer::createWriter();
 
@@ -16,12 +18,16 @@ $headerCellStyle->setColor('#FFF');
 $headerCellStyle->setFill('#000');
 
 $sheet = 'example';
+$header = new Header();
+$header
+    ->setAutoFilter(true)
+    ->setFreezeColumns(0)
+    ->setFreezeRows(1)
+    ->createCell('Column1', HeaderCell::TYPE_STRING, $headerCellStyle)
+    ->addCell((new HeaderCell('Column2', HeaderCell::TYPE_DATETIME, $headerCellStyle))
+        ->setColumnWidth(20));
 
-Writer::writeHeaderRow($writer, $sheet, [
-    (new HeaderCell('Column1', HeaderCell::TYPE_STRING, $headerCellStyle)),
-    (new HeaderCell('Column2', HeaderCell::TYPE_DATETIME, $headerCellStyle))
-        ->setColumnWidth(20),
-], $freezeRow = 1, $freezeColumn = 0, $autoFilter = true);
+Writer::writeHeaderRow($writer, $sheet, $header);
 
 
 
@@ -35,11 +41,15 @@ $column2Style->setFontStyle(CellStyle::FONT_STYLE_BOLD, CellStyle::FONT_STYLE_IT
 $column2Style->setBorderStyle(CellStyle::BORDER_STYLE_DOTTED);
 $column2Style->setBorder(CellStyle::BORDER_BOTTOM, CellStyle::BORDER_LEFT);
 
-foreach ($data as $row) {
-    Writer::writeRow($writer, $sheet, [
-        (new Cell($row[0])),
-        (new Cell($row[1], $column2Style))
-    ]);
+foreach ($data as $dataRow) {
+    $row = new Row();
+
+    $row
+        ->setHeight(30)
+        ->createCell($dataRow[0])
+        ->addCell((new Cell($dataRow[1], $column2Style)));
+
+    Writer::writeRow($writer, $sheet, $row);
 }
 
 
