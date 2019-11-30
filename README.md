@@ -34,8 +34,7 @@ $header
     ->setFreezeColumns(0)
     ->setFreezeRows(1)
     ->createCell('Column1', HeaderCell::TYPE_STRING, $headerCellStyle)
-    ->addCell((new HeaderCell('Column2', HeaderCell::TYPE_DATETIME, $headerCellStyle))
-        ->setColumnWidth(20));
+    ->addCell((new HeaderCell('Column2', HeaderCell::TYPE_DATETIME, $headerCellStyle))->setColumnWidth(20));
 
 Writer::writeHeaderRow($writer, $sheet, $header);
 
