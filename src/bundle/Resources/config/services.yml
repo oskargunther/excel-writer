@@ -1,0 +1,3 @@
+services:
+  excel_writer.service:
+    class: ExcelWriterBundle\Service\ExcelWriterService

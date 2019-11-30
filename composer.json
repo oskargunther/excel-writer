@@ -3,12 +3,16 @@
     "description": "OOP lightweight Excel Writer",
     "autoload": {
         "psr-4": {
-            "ExcelWriter\\": "src"
+            "ExcelWriter\\": "src/lib",
+            "ExcelWriterBundle\\": "src/bundle"
         }
     },
     "require": {
         "php": ">=7.1",
         "mk-j/php_xlsxwriter": "^0.37.0"
     },
-    "license": "MIT"
+    "license": "MIT",
+    "require-dev": {
+        "symfony/framework-bundle": ">=2.8.30"
+    }
 }
