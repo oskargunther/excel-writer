@@ -26,15 +26,22 @@ Writer::writeHeaderRow($writer, $sheet, [
 
 
 // Writing data
+$data = [
+    ['Value1', date('Y-m-d H:i:s')],
+    ['Value2', date('Y-m-d H:i:s')]
+];
 $column2Style = new CellStyle();
 $column2Style->setFontStyle(CellStyle::FONT_STYLE_BOLD, CellStyle::FONT_STYLE_ITALIC);
 $column2Style->setBorderStyle(CellStyle::BORDER_STYLE_DOTTED);
 $column2Style->setBorder(CellStyle::BORDER_BOTTOM, CellStyle::BORDER_LEFT);
 
-Writer::writeRow($writer, $sheet, [
-    (new Cell('value')),
-    (new Cell(date('Y-m-d H:i:s'), $column2Style))
-]);
+foreach ($data as $row) {
+    Writer::writeRow($writer, $sheet, [
+        (new Cell($row[0])),
+        (new Cell($row[1], $column2Style))
+    ]);
+}
+
 
 
 
