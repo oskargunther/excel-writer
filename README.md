@@ -1,4 +1,4 @@
-# Excel Writer
+# Lightweight PHP >7.1 Excel Writer
 
     This library uses https://github.com/mk-j/PHP_XLSXWriter as engine
     It's only OOP wrapper
