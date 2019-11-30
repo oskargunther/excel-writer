@@ -12,28 +12,6 @@ use XLSXWriter;
 
 class Writer
 {
-    /**
-     * @var string[]
-     */
-    private $letters;
-
-    public function __construct()
-    {
-        $this->letters = $this->getLetters();
-    }
-
-    private function getLetters()
-    {
-        $letters = range('A', 'Z');
-        $final = $letters;
-        foreach($letters as $letter) {
-            foreach($letters as $secondLetter) {
-                $final[] = $letter.$secondLetter;
-            }
-        }
-        return $final;
-    }
-
     public static function createWriter(): XLSXWriter
     {
         return new XLSXWriter();
