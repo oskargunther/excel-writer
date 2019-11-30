@@ -1,18 +1,6 @@
-# Excel Writer
+<?php
 
-    This library uses https://github.com/mk-j/PHP_XLSXWriter as engine
-    It's only OOP wrapper
-    
-    As the engine, this library don't waste memory and is written for fast generation of huge sheets
-    
-
-### Installation
-    
-    composer require oskargunther/excel-writer
-
-### Example of usage
-```php
-include_once 'vendor/autoload.php';
+include_once '../vendor/autoload.php';
 
 use ExcelWriter\Writer;
 use ExcelWriter\Model\HeaderCell;
@@ -52,4 +40,3 @@ Writer::writeRow($writer, $sheet, [
 
 // Saving file
 Writer::writeToFile($writer, 'example.xlsx');
-```
