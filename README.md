@@ -10,6 +10,23 @@
     
     composer require oskargunther/excel-writer
 
+### Symfony > 2.8
+    
+```php
+    class AppKernel extends Kernel
+    {
+        public function registerBundles()
+        {
+            $bundles = [
+                ....
+                new \ExcelWriterBundle\ExcelWriterBundle(),
+            ];
+    
+        }
+    }
+```
+    
+
 ### Example of usage
 ```php
 include_once 'vendor/autoload.php';
@@ -70,3 +87,17 @@ Writer::writeToFile($writer, 'example.xlsx');
  
  
 [Example .xlsx File](https://github.com/oskargunther/excel-writer/raw/master/examples/example.xlsx)
+
+
+### Using service
+
+```php
+$writer = new \ExcelWriterBundle\Service\ExcelWriterService();
+// or
+$writer = $this->container->get('excel_writer.service');
+// Symfony service is not shared so every instance have it's own writer
+
+$writer->writeHeaderRow(...);
+$writer->writeRow(...);
+$writer->save($filename);
+```
