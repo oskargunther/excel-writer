@@ -14,6 +14,12 @@ class Configuration implements ConfigurationInterface
      */
     public function getConfigTreeBuilder()
     {
-        return new TreeBuilder('excel_writer');
+        $config = new TreeBuilder();
+
+        $config
+            ->root('excel_writer')
+            ->children()->end();
+
+        return $config;
     }
 }
