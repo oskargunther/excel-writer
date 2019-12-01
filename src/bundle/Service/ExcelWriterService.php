@@ -48,4 +48,9 @@ class ExcelWriterService
     {
         Writer::writeToFile($this->writer, $filename);
     }
+
+    public function getWriter(): XLSXWriter
+    {
+        return $this->writer;
+    }
 }
