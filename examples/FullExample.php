@@ -33,7 +33,7 @@ Writer::writeHeaderRow($writer, $sheet, $header);
 
 // Writing data
 $data = [
-    ['Value1', date('Y-m-d H:i:s')],
+    ['Value1serg sergsergse rgsse rgsergsergserg se', date('Y-m-d H:i:s')],
     ['Value2', date('Y-m-d H:i:s')]
 ];
 $column2Style = new CellStyle();
@@ -46,7 +46,7 @@ foreach ($data as $dataRow) {
 
     $row
         ->setHeight(30)
-        ->createCell($dataRow[0])
+        ->createCell($dataRow[0], (new CellStyle())->setWrapText(true))
         ->addCell((new Cell($dataRow[1], $column2Style)));
 
     Writer::writeRow($writer, $sheet, $row);

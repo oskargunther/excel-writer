@@ -42,7 +42,6 @@ class Writer
             $styles['height'] = $xlsxRow->getHeight();
         }
 
-        $styles['wrap_text'] = $xlsxRow->isWrapText();
         $styles['hidden'] = $xlsxRow->isHidden();
         $styles['collapsed'] = $xlsxRow->isCollapsed();
 

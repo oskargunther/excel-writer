@@ -19,11 +19,6 @@ class Row
     /**
      * @var boolean
      */
-    private $wrapText;
-
-    /**
-     * @var boolean
-     */
     private $hidden;
 
     /**
@@ -66,24 +61,6 @@ class Row
     public function setHeight(int $height): self
     {
         $this->height = $height;
-        return $this;
-    }
-
-    /**
-     * @return bool|null
-     */
-    public function isWrapText(): ?bool
-    {
-        return $this->wrapText;
-    }
-
-    /**
-     * @param bool $wrapText
-     * @return self
-     */
-    public function setWrapText(bool $wrapText): self
-    {
-        $this->wrapText = $wrapText;
         return $this;
     }
 

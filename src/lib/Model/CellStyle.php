@@ -76,6 +76,9 @@ class CellStyle
     /** @var string */
     private $verticalAlign;
 
+    /** @var boolean */
+    private $wrapText;
+
     public function toArray(): array
     {
         $array = [
@@ -89,6 +92,7 @@ class CellStyle
             'fill' => $this->fill,
             'halign' => $this->horizontalAlign,
             'valign' => $this->verticalAlign,
+            'wrap_text' => $this->wrapText,
         ];
 
         $result = [];
@@ -278,6 +282,24 @@ class CellStyle
     public function setVerticalAlign(string $verticalAlign): self
     {
         $this->verticalAlign = $verticalAlign;
+        return $this;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isWrapText(): bool
+    {
+        return $this->wrapText;
+    }
+
+    /**
+     * @param bool $wrapText
+     * @return self
+     */
+    public function setWrapText(bool $wrapText): self
+    {
+        $this->wrapText = $wrapText;
         return $this;
     }
 
